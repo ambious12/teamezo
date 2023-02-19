@@ -1,14 +1,14 @@
-const chatBtn = document.querySelector("#chatBtn")
-const chatSpace = document.querySelector("#chatSpace")
-const cancelBtn = document.querySelector("#cancelBtn")
+const chatBtn = document.querySelector('#chatBtn')
+const chatSpace = document.querySelector('#chatSpace')
+const cancelBtn = document.querySelector('#cancelBtn')
 
-chatBtn.addEventListener("click", (e) => {
-    chatSpace.style.right = "5rem"
+chatBtn.addEventListener('click', (e) => {
+    chatSpace.style.right = '5rem'
     e.target.style.opacity = 0
 })
 
-cancelBtn.addEventListener("click", (e) => {
-    chatSpace.style.right = "-55rem"
+cancelBtn.addEventListener('click', (e) => {
+    chatSpace.style.right = '-55rem'
     setTimeout(() => {
         chatBtn.style.opacity = 1
     }, 600)
@@ -18,27 +18,27 @@ cancelBtn.addEventListener("click", (e) => {
 // 1. 전체 데이터 불러오기
 // 2. 데이터 입력시 데이터 가져오기
 
-const socket = io.connect("http://localhost:3000", {
-    path: "/socket.io",
-    transports: ["websocket"]
+const socket = io.connect('http://3.35.9.237:3000', {
+    path: '/socket.io',
+    transports: ['websocket'],
 })
 
-const chatContentsLeft = document.querySelector(".chatContentsLeft")
-const chatContentsRight = document.querySelector(".chatContentsRight")
-const chatBox = document.querySelector("#chatBox")
-const input = document.querySelector("#chatBox > input")
+const chatContentsLeft = document.querySelector('.chatContentsLeft')
+const chatContentsRight = document.querySelector('.chatContentsRight')
+const chatBox = document.querySelector('#chatBox')
+const input = document.querySelector('#chatBox > input')
 // const chatSpaceContent = document.querySelector("#chatSpaceContent")
 
-chatBox.addEventListener("submit", (e) => {
+chatBox.addEventListener('submit', (e) => {
     e.preventDefault()
-    const userid = document.cookie.split("=")[1]
+    const userid = document.cookie.split('=')[1]
     const { message } = e.target
-    
-    socket.emit('data', { message: message.value, userid } )
+
+    socket.emit('data', { message: message.value, userid })
 
     const ul = document.createElement('ul')
     const li = document.createElement('li')
-    ul.classList.add("chatContentsRight")
+    ul.classList.add('chatContentsRight')
     li.innerHTML = `<li class="chatContent">${message.value}</li>`
 
     ul.append(li)
@@ -48,12 +48,12 @@ chatBox.addEventListener("submit", (e) => {
     e.target.focus()
 })
 
-socket.on("reply", (dataValue) => {
+socket.on('reply', (dataValue) => {
     const json = JSON.parse(dataValue)
     const { userid, data } = json
-    const ul = document.createElement("ul")
-    const li = document.createElement("li")
-    ul.classList.add("chatContentsLeft")
+    const ul = document.createElement('ul')
+    const li = document.createElement('li')
+    ul.classList.add('chatContentsLeft')
     li.innerHTML = `<li class="chatUserName">${userid}</li>
     <li class="chatContent">${data}</li>`
     ul.append(li)

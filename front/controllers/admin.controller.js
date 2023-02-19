@@ -1,17 +1,17 @@
-const axios = require("axios")
+const axios = require('axios')
 
 const request = axios.create({
-    baseURL: "http://localhost:3000/admin",
+    baseURL: 'http://3.35.9.237:3000/admin',
     withCredentials: true,
 })
 
 exports.getAdmin = (req, res, next) => {
     try {
         const { token } = req.cookies
-        if( token !== "admin" ){
-            res.render("error.html")
+        if (token !== 'admin') {
+            res.render('error.html')
         } else {
-            res.render("admin/admin.html", { token })
+            res.render('admin/admin.html', { token })
         }
     } catch (error) {
         next(error)
@@ -20,21 +20,21 @@ exports.getAdmin = (req, res, next) => {
 
 exports.getAdminUser = async (req, res, next) => {
     try {
-        if( req.query.search ){
+        if (req.query.search) {
             const userid = req.query.search
             const response = await request.post(`/user`, { userid })
             const userList = []
             userList[0] = response.data
-            res.render("admin/adminUser.html", { userList })
+            res.render('admin/adminUser.html', { userList })
         } else {
             const response = await request.get(`/user?page=${req.query.page}`)
             const { userList, startNumber, endNumber, totalPage } = response.data
             const btnNumber = []
-            for(let i = startNumber; i <= endNumber; i++){
+            for (let i = startNumber; i <= endNumber; i++) {
                 btnNumber.push(i)
             }
-    
-            res.render("admin/adminUser.html", { userList, btnNumber, totalPage })
+
+            res.render('admin/adminUser.html', { userList, btnNumber, totalPage })
         }
     } catch (error) {
         next(error)
@@ -54,8 +54,8 @@ exports.getAdminUserEdit = async (req, res, next) => {
     try {
         const response = await request.get(`/userEdit?userid=${req.query.userid}`)
         const user = response.data
-        user.avatarUrl = user.avatarUrl.split("public")[1]
-        res.render("admin/adminUserEdit.html", { user })
+        user.avatarUrl = user.avatarUrl.split('public')[1]
+        res.render('admin/adminUserEdit.html', { user })
     } catch (error) {
         next(error)
     }
@@ -75,7 +75,7 @@ exports.postAdminUserEdit = async (req, res, next) => {
 
 exports.getAdminCategory = (req, res, next) => {
     try {
-        res.render("admin/adminCategory.html")
+        res.render('admin/adminCategory.html')
     } catch (error) {
         next(error)
     }
@@ -95,13 +95,13 @@ exports.getAdminBoard = async (req, res, next) => {
         const response = await request.get(`/board?page=${Number(page)}&order=${order}`)
         const { boardList, startNumber, endNumber, totalPage } = response.data
         const btnNumber = []
-        for(let i = startNumber; i <= endNumber; i++){
+        for (let i = startNumber; i <= endNumber; i++) {
             btnNumber.push(i)
         }
-        for(let i = 0; i <= boardList.length - 1; i++){
-            boardList[i].createAt = boardList[i].createAt.split("T")[0] 
+        for (let i = 0; i <= boardList.length - 1; i++) {
+            boardList[i].createAt = boardList[i].createAt.split('T')[0]
         }
-        res.render("admin/adminBoard.html", { boardList, btnNumber, totalPage })
+        res.render('admin/adminBoard.html', { boardList, btnNumber, totalPage })
     } catch (error) {
         next(error)
     }
@@ -117,7 +117,7 @@ exports.postAdminBoard = (req, res, next) => {
 
 exports.getAdminStats = (req, res, next) => {
     try {
-        res.render("admin/adminStats.html")
+        res.render('admin/adminStats.html')
     } catch (error) {
         next(error)
     }

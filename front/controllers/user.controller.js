@@ -1,6 +1,6 @@
 const axios = require('axios')
 const request = axios.create({
-    baseURL: 'http://localhost:3000',
+    baseURL: 'http://3.35.9.237:3000',
     withCredentials: true,
 })
 
@@ -60,12 +60,12 @@ exports.getprofile = async (req, res, next) => {
         const { token } = req.cookies
         const profileCookies = req.cookies.token
         const { page } = req.query
-        if (profileCookies === undefined) throw "토큰이 없습니다."
-            const result = await request.get('/users/profile', {
-                url: 'http://localhost:3000/',
-                params: { userid: profileCookies, page },
-            })
-            res.render('user/profile', { result, token })
+        if (profileCookies === undefined) throw '토큰이 없습니다.'
+        const result = await request.get('/users/profile', {
+            url: 'http://3.35.9.237:3000/',
+            params: { userid: profileCookies, page },
+        })
+        res.render('user/profile', { result, token })
     } catch (error) {
         next(error)
     }
@@ -74,8 +74,8 @@ exports.getprofile = async (req, res, next) => {
 exports.postProfileEdit = (req, res, next) => {
     try {
         const profileCookies = JSON.stringify(req.cookies.token)
-        if (profileCookies === undefined) throw "토큰이 없습니다."
-            res.redirect('/user/profile')
+        if (profileCookies === undefined) throw '토큰이 없습니다.'
+        res.redirect('/user/profile')
     } catch (error) {
         next(error)
     }
@@ -85,11 +85,11 @@ exports.getProfileEdit = (req, res, next) => {
     try {
         const profileCookies = JSON.stringify(req.cookies.token)
         const { token } = req.cookies
-        if (profileCookies === undefined) throw "로그인이 필요합니다."
-            const userid = 'hongtae'
-            const username = 'hongttt'
-            const useremail = 'hongtae3@gmail.com'
-            res.render('user/profileEdit.html', { userid, username, useremail, token })
+        if (profileCookies === undefined) throw '로그인이 필요합니다.'
+        const userid = 'hongtae'
+        const username = 'hongttt'
+        const useremail = 'hongtae3@gmail.com'
+        res.render('user/profileEdit.html', { userid, username, useremail, token })
     } catch (error) {
         next(error)
     }

@@ -4,7 +4,7 @@ const submitHandler = async (e) => {
 
     let body = new FormData(e.target)
     body.append('userid', document.cookie)
-    const insertBoardContent = await axios.post('http://localhost:3000/qna/write', body, {
+    const insertBoardContent = await axios.post('http://3.35.9.237:3000/qna/write', body, {
         header: {
             ['Content-type']: 'multipart/form-data',
         },

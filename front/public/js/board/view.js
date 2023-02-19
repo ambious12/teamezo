@@ -1,39 +1,39 @@
 const request = axios.create({
-    baseURL:"http://localhost:3000/board",
+    baseURL: 'http://3.35.9.237:3000/board',
     withCredentials: true,
 })
 
 /* 댓글 내용 없으면 알림창 뜸 */
-const commentContentForm = document.querySelector(".writeCommentForm > form");
-const commentBox = document.querySelector(".writeCommentForm > form > div > textarea");
+const commentContentForm = document.querySelector('.writeCommentForm > form')
+const commentBox = document.querySelector('.writeCommentForm > form > div > textarea')
 
-commentContentForm.addEventListener("submit", (e) => {
-    if (commentBox.value === "") {
-        e.preventDefault();
-        alert("댓글 내용을 입력해주세요!");
-        return;
+commentContentForm.addEventListener('submit', (e) => {
+    if (commentBox.value === '') {
+        e.preventDefault()
+        alert('댓글 내용을 입력해주세요!')
+        return
     }
-});
+})
 
 /* 답글쓰기 버튼 누르면 답댓창 뜨는 기능 */
-const commentAll = document.querySelectorAll(".commentCenterContent > ul > li > a");
-const commentReplyBox = document.querySelectorAll(".commentReplyBox");
-const commentAllArr = Object.values(commentAll);
-const commentReplyBoxArr = Object.values(commentReplyBox);
+const commentAll = document.querySelectorAll('.commentCenterContent > ul > li > a')
+const commentReplyBox = document.querySelectorAll('.commentReplyBox')
+const commentAllArr = Object.values(commentAll)
+const commentReplyBoxArr = Object.values(commentReplyBox)
 
 // const reCommentClickHander = (e) => {
 //     commentReplyBox.className = "commentReplyBox";
 // };
 
 for (let i = 0; i <= commentAllArr.length - 1; i++) {
-    commentAllArr[i].addEventListener("click", (e) => {
-        e.preventDefault();
-        if (commentReplyBox[i].classList.contains("off")) {
-            commentReplyBox[i].className = "commentReplyBox";
+    commentAllArr[i].addEventListener('click', (e) => {
+        e.preventDefault()
+        if (commentReplyBox[i].classList.contains('off')) {
+            commentReplyBox[i].className = 'commentReplyBox'
         } else {
-            commentReplyBox[i].className = "off";
+            commentReplyBox[i].className = 'off'
         }
-    });
+    })
 }
 
 /* 답댓창 등록 기능 => 나중에 데이터 어떻게 오게 할 지 생각한 다음에 짜기 */
@@ -62,11 +62,11 @@ for (let i = 0; i <= commentAllArr.length - 1; i++) {
 //     });
 // }
 
-const deleteBtn = document.querySelector(".contentDelete > a")
-deleteBtn.addEventListener("click", async (e) => {
+const deleteBtn = document.querySelector('.contentDelete > a')
+deleteBtn.addEventListener('click', async (e) => {
     e.preventDefault()
-    const idx = deleteBtn.getAttribute("href").split("=")[1]
+    const idx = deleteBtn.getAttribute('href').split('=')[1]
     await request.post(`/delete?id=${idx}`)
-    alert("글이 삭제되었습니다.")
-    location.href = `http://localhost:3005/board/list?page=1`
+    alert('글이 삭제되었습니다.')
+    location.href = `http://3.35.9.237:3005/board/list?page=1`
 })

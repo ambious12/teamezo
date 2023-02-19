@@ -7,7 +7,7 @@ for (let i = 0; i <= 50; i++) {
         content: `내용 : ${i}`,
         mainName: 'IT',
         subName: 'css',
-        notice: true,
+        notice: false,
     }
 
     board.push(obj)

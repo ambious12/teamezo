@@ -1,6 +1,6 @@
-const axios = require("axios")
+const axios = require('axios')
 const request = axios.create({
-    baseURL: "http://localhost:3000",
+    baseURL: 'http://3.35.9.237:3000',
     withCredentials: true,
 })
 
@@ -11,16 +11,16 @@ exports.getIndex = async (req, res, next) => {
         const { token } = req.cookies
         const result = await request.get('/')
         const { boardList, mainName, tagName } = result.data
-        const list =  boardList
+        const list = boardList
         if (Object.values(req.query).length) {
             res.setHeader('Set-Cookie', `token=${req.query.token};path=/;`)
-            res.render("index.html", { list, mainName, tagName, token })
+            res.render('index.html', { list, mainName, tagName, token })
         } else {
             const { token } = req.cookies
             const result = await request.get('/')
             const { boardList, mainName, tagName } = result.data
-            const list =  boardList
-            res.render("index.html", { list, mainName, tagName, token })
+            const list = boardList
+            res.render('index.html', { list, mainName, tagName, token })
         }
     } catch (error) {
         next(error)

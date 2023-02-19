@@ -55,7 +55,7 @@ app.get('/oauth/kakao', async (req, res, next) => {
             },
         })
         const kakaoLoginUser = await userKakao.addKakaoInfo(user.data) // id hash화 한것? front set-cookies로 저장
-        res.redirect(`http://localhost:3005/?token=${kakaoLoginUser}`)
+        res.redirect(`http://3.35.9.237:3005/?token=${kakaoLoginUser}`)
     } catch (e) {}
 })
 

@@ -1,6 +1,6 @@
 const axios = require('axios')
 const request = axios.create({
-    baseURL: 'http://127.0.0.1:3000',
+    baseURL: 'http://3.35.9.237:3000',
     withCredentials: true,
 })
 const board = 'qna'

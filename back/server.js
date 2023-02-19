@@ -82,7 +82,7 @@ const http = app.listen(3000, async () => {
     // await sequelize.models.File.create({ fileUrl: "upload/asdf.jpg", boardId: 7 });
     // await sequelize.models.File.create({ fileUrl: "upload/asdf.jpg", boardId: 7 });
 
-    console.log(`Running on http://localhost:${port}`)
+    console.log(`Running on http://3.35.9.237:${port}`)
 })
 
 socketIO(http, app)

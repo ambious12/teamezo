@@ -1,5 +1,5 @@
 const request = axios.create({
-    baseURL: "http://localhost:3000/admin",
+    baseURL: 'http://3.35.9.237:3000/admin',
     withCredentials: true,
 })
 
